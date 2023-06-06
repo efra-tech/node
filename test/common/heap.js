@@ -57,7 +57,7 @@ function createJSHeapSnapshot(stream = getHeapSnapshot()) {
 
 function readHeapInfo(raw, fields, types, strings) {
   const items = [];
-
+  const type1 = ['element', 'hidden'];
   for (let i = 0; i < raw.length; i += fields.length) {
     const item = {};
     for (let j = 0; j < fields.length; j++) {
@@ -66,7 +66,10 @@ function readHeapInfo(raw, fields, types, strings) {
       if (Array.isArray(type)) {
         item[name] = type[raw[i + j]];
       } else if (name === 'name_or_index') {  // type === 'string_or_number'
-        if (item.type === 'element' || item.type === 'hidden')
+
+        
+      //  if (item.type === 'element' || item.type === 'hidden')
+      if(type1.includes(item.type)) 
           type = 'number';
         else
           type = 'string';
